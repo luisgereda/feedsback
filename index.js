@@ -26,4 +26,16 @@ app.get("/:userId", (req, res) => {
   res.send(token);
 });
 
+app.post("/update", async (req, res) => {
+  const { id, like } = req.body;
+  const newLikes = parseInt(like) + 1;
+
+  const updateActivity = await client.activityPartialUpdate({
+    id: id,
+    set: { likes: newLikes },
+  });
+  console.log(updateActivity);
+  res.send(updateActivity);
+});
+
 app.listen(port, onListen);
