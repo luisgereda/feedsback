@@ -38,4 +38,15 @@ app.post("/update", async (req, res) => {
   res.send(updateActivity);
 });
 
+app.delete("/deleteGlobal/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const global = client.feed("global", "all");
+
+  const request = await global.removeActivity(id);
+  console.log(request);
+
+  res.send(request);
+});
+
 app.listen(port, onListen);
